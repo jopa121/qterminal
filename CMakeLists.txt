@@ -32,6 +32,7 @@ find_package(Qt6Gui ${QT_MINIMUM_VERSION} REQUIRED)
 find_package(Qt6LinguistTools ${QT_MINIMUM_VERSION} REQUIRED)
 find_package(Qt6Widgets ${QT_MINIMUM_VERSION} REQUIRED)
 find_package(LayerShellQt ${SHELLQT_MINIMUM_VERSION} REQUIRED)
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS WaylandClient Qml)
 if(UNIX)
     find_package(Qt6DBus ${QT_MINIMUM_VERSION} REQUIRED)
     find_package(Qt6 COMPONENTS Core REQUIRED)
@@ -209,7 +210,9 @@ target_link_libraries(${EXE_NAME}
     Qt6::Gui
     Qt6::Widgets
     qtermwidget6
-    LayerShellQtInterface
+    LayerShellQt::Interface
+    Qt::WaylandClientPrivate
+    Wayland::Client
 )
 if(QXT_FOUND)
     target_link_libraries(${EXE_NAME} ${QXT_CORE_LIB} ${QXT_GUI_LIB})
